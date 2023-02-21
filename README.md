@@ -2,10 +2,10 @@
 
 run with 
 ```console
-gcc 2048.cpp -o 2048
+$ gcc 2048.cpp -o 2048
 ```
 ```console
-./2048
+$ ./2048
 ```
           
 
