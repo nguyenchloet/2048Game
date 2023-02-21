@@ -1,4 +1,7 @@
-//2048 game
+/*
+ * 2048 console game
+ */
+
 #include <iostream>
 #include <cstdlib>
 
@@ -10,12 +13,19 @@ const char RIGHT = 'd';
 const char DOWN = 's';
 const char QUIT = 'q';
 
-// the gameboard
+/*
+ * the gameboard
+ */
 int board[BOARD_SIZE][BOARD_SIZE];
 
-// copy of the gameboard for change comparison
+/*
+ * copy of the gameboard for change comparison
+ */
 int _board[BOARD_SIZE][BOARD_SIZE];
 
+/*
+ * Class
+ */
 class Game {
     public:
         Game();
@@ -23,7 +33,9 @@ class Game {
         void Play();
 
     private:
-        //Variables                                                                                                                                               
+        /*
+	 * Variables  
+	 */
         int score;
 
         //Functions    
@@ -45,8 +57,10 @@ Game::Game() {}
 
 Game::~Game() {}
 
-// place two tiles randomly on the board to start the game - either 2s or 4s
-// otherwise, the tiles will remain 0 value
+/*
+ * Place two tiles randomly on the board to start the game - either 2s or 4s
+ * Otherwise, the tiles will remain 0 value
+ */
 void Game::InitializeBoard() {
     srand(time(NULL));
     score = 0;
@@ -85,9 +99,11 @@ void Game::InitializeBoard() {
   	}
 }
 
+/*
+ * print board
+ * format spacing around integers on board up to 5 digits
+ */
 void Game::PrintBoard(){
-    // print board
-    // format spacing around integers on board up to 5 digits
 	for (int x = 0; x < BOARD_SIZE; x++) {
         std::cout << "+------+------+------+------+" << std::endl;
 		for (int y = 0; y < BOARD_SIZE; y++) {
@@ -114,6 +130,9 @@ void Game::PrintBoard(){
 
 }
 
+/*
+ * Get user input a/w/s/d/q to shift board or quit
+ */
 void Game::CommandLoop() {
     char user_choice;
     do {
@@ -152,13 +171,15 @@ void Game::CommandLoop() {
 }
 
 /*                                                                                                                                                                
- * Update score in own function                                                                                                                                   
+ * Output score function                                                                                                                                   
  */
 void Game::UpdateScore() {
   std::cout << "Score: " << score << std::endl;
 }
 
-// add one tile to a random empty position on the board
+/*
+ * add one tile to a random empty position on the board
+ */
 void Game::AddTile() {
     srand(time(NULL));
     int num_empty = 0;
@@ -171,7 +192,9 @@ void Game::AddTile() {
         }
     }
 
-    //from empty positions, randomly generate an index     
+    /* 
+     * from empty positions, randomly generate an index     
+     */
     int empty_position = rand() % num_empty;                                                                 
     num_empty = 0;
     for (int i = 0; i < BOARD_SIZE; i++) {
@@ -210,7 +233,9 @@ void Game::ShiftLeft() {
       }
     }
   }
-  //merge tiles LEFT                                                                                                                                              
+  /*
+   * merge tiles LEFT
+   */
   for (int row = 0; row < BOARD_SIZE; row++) {
     for (int col = 0; col < BOARD_SIZE; col++) {
       for (int curr_col = col + 1; curr_col < BOARD_SIZE; curr_col++) {
@@ -244,7 +269,9 @@ void Game::ShiftRight() {
       }
     }
   }
-  // merge tiles RIGHT                                                                                                                                            
+  /*
+   * merge tiles RIGHT 
+   */
   for (int row = 0; row < BOARD_SIZE; row++) {
     for (int col = BOARD_SIZE; col >= 0; col--) {
       for (int curr_col = col - 1; curr_col >= 0; curr_col--) {
@@ -278,7 +305,9 @@ void Game::ShiftUp() {
       }
     }
   }
-  // merge tiles UP                                                                                                                                               
+  /*
+   * merge tiles UP
+   */
   for (int col = 0; col < BOARD_SIZE; col++) {
     for (int row = 0; row < BOARD_SIZE; row++) {
       for (int curr_col = col + 1; curr_col < BOARD_SIZE; curr_col++) {
@@ -311,7 +340,9 @@ void Game::ShiftDown() {
       }
     }
   }
-  //merge tiles DOWN                                                                                                                                              
+  /* 
+   * merge tiles DOWN
+   */
   for (int col = BOARD_SIZE - 1; col >= 0; col--) {
     for (int row = 0; row < BOARD_SIZE; row++) {
       for (int curr_col = col - 1; curr_col >= 0; curr_col--) {
@@ -353,7 +384,9 @@ bool Game::BoardFull() {
  * When board is full?                                                                                                                                            
  */
 bool Game::CanMerge() {
-  //check left                                                                                                                                                    
+  /*
+   * check left        
+   */
   for (int row = 0; row < BOARD_SIZE; row++) {
     for (int col = 0; col < BOARD_SIZE; col++) {
       for (int curr_col = col + 1; curr_col < BOARD_SIZE; curr_col++) {
@@ -373,7 +406,9 @@ bool Game::CanMerge() {
       }
     }
   }
-  //check up                                                                                                                                                      
+  /* 
+   * check up
+   */
   for (int col = 0; col < BOARD_SIZE; col++) {
     for (int row = 0; row < BOARD_SIZE; row++) {
       for (int curr_col = col + 1; curr_col < BOARD_SIZE; curr_col++) {
@@ -383,7 +418,9 @@ bool Game::CanMerge() {
       }
     }
   }
-  //check down                                                                                                                                                    
+  /* 
+   * check down  
+   */
   for (int col = BOARD_SIZE - 1; col >= 0; col--) {
     for (int row = 0; row < BOARD_SIZE; row++) {
       for (int curr_col = col - 1; curr_col >= 0; curr_col--) {
