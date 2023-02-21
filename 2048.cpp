@@ -1,4 +1,4 @@
-// simplified 2048 game
+//2048 game
 #include <iostream>
 #include <cstdlib>
 
@@ -15,6 +15,31 @@ int board[BOARD_SIZE][BOARD_SIZE];
 
 // copy of the gameboard for change comparison
 int _board[BOARD_SIZE][BOARD_SIZE];
+
+class Game {
+    public:
+        Game();
+        ~Game();
+        void Play();
+
+    private:
+        //Variables                                                                                                                                               
+        int score;
+
+        //Functions    
+        void InitializeBoard();    
+        void PrintBoard();   
+        void CommandLoop();    
+        void AddTile();
+        void UpdateScore();
+        void ShiftLeft();
+        void ShiftRight();
+        void ShiftUp();
+        void ShiftDown();   
+        bool BoardFull();
+        bool CanMerge(); 
+        bool GameOver();                                                                                                                            
+};
 
 Game::Game() {}
 
